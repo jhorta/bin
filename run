@@ -1,0 +1,20 @@
+#!/bin/bash
+
+file="$1"
+
+case "$file" in
+  *.cpp)
+    g++ -g -Wall -o /tmp/run-rust "$file" &&
+    /tmp/run-rust;;
+	*.go )
+		go run "$file";;
+	*.rb )
+		ruby "$file";;
+	*.py )
+		python "$file";;
+  *.rs )
+    rustc -o /tmp/run-rust "$file" &&
+    /tmp/run-rust;;
+	*.sh )
+		bash "$file";;
+esac

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+file="$1"
+
+case "$file" in
+  *.cpp)
+    cat ~/bin/templates/cpp > $file &&
+    echo "Creating template. Type :e to refresh file.";;
+  *.rb )
+    chmod +x $file &&
+    cat ~/bin/templates/rb  > $file &&
+    echo "Creating template. Type :e to refresh file.";;
+  *.sh )
+    chmod +x $file &&
+    cat ~/bin/templates/sh > $file &&
+    echo "Creating template. Type :e to refresh file.";;
+  *    )
+    echo "No available template for current file."
+esac
