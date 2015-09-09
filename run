@@ -4,7 +4,7 @@ file="$1"
 
 case "$file" in
   *.cpp)
-    g++ -g -Wall -o /tmp/run-rust "$file" &&
+    g++ -std=c++11 -g -Wall -o /tmp/run-rust "$file" &&
     /tmp/run-rust;;
 	*.go )
 		go run "$file";;
