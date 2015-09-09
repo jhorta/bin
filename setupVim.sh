@@ -20,6 +20,8 @@ fi
 ########### Download vim-colors-solarized
 if [ ! -e "vim-colors-solarized" ]; then
   git clone git://github.com/altercation/vim-colors-solarized.git
+  wget https://raw.githubusercontent.com/nanotech/jellybeans.vim/master/colors/jellybeans.vim
+  mv jellybeans.vim vim-colors-solarized/colors
 fi
 ########### Download nerdCommenter
 if [ ! -e "nerdcommenter" ]; then
@@ -111,8 +113,8 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
  
 " Recommended settings for vim-colors
 syntax enable
-set background=dark
-colorscheme solarized
+set background=light
+colorscheme jellybeans
 let g:solarized_termcolors=256
  
 " Recommended settings for vim-gutter
