@@ -4,17 +4,24 @@ file="$1"
 
 case "$file" in
   *.cpp)
-    g++ -std=c++11 -g -Wall -o /tmp/run-rust "$file" &&
-    /tmp/run-rust;;
-	*.go )
-		go run "$file";;
-	*.rb )
-		ruby "$file";;
-	*.py )
-		python "$file";;
+    g++ -std=c++11 -g -Wall -o /tmp/run-rust "$file" 2> /tmp/run-log
+    if [ $? -eq 0 ]; then
+      echo Compilation Succeeded!
+      /tmp/run-rust
+    else
+      echo Compilation Failed!
+      less /tmp/run-log
+    fi;;
+  *.go )
+    go run "$file";;
+  *.rb )
+    ruby "$file";;
+  *.py )
+    python "$file";;
   *.rs )
     rustc -o /tmp/run-rust "$file" &&
-    /tmp/run-rust;;
-	*.sh )
-		bash "$file";;
+      /tmp/run-rust;;
+  *.sh )
+    bash "$file";;
 esac
+

@@ -1,3 +1,12 @@
+#!/bin/bash
+echo "Installing dependencies."
+sudo apt-get install silversearcher-ag
+sudo apt-get install tmux
+sudo apt-get install zsh
+sudo apt-get install git-core
+wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
+chsh -s `which zsh`
+
 echo "Installing vim plugins......"
 # setup pathogen
 mkdir -p ~/.vim/autoload ~/.vim/bundle && \
@@ -84,6 +93,8 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 " End of syntastic settings
  
 " Recommended settings for ctrl P
@@ -116,7 +127,12 @@ syntax enable
 set background=light
 colorscheme jellybeans
 let g:solarized_termcolors=256
- 
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+endif
+
 " Recommended settings for vim-gutter
 let g:gitgutter_sign_column_always = 1
 let g:gitgutter_highlight_lines = 1
@@ -176,6 +192,7 @@ highlight LineNr ctermfg=yellow
 EOF
 echo "Done creating vimrc file."
  
+home=~
 echo "Getting vim automation scripts."
 cd ~/.vim
 if [ ! -e "bin" ]; then
@@ -186,7 +203,6 @@ fi
 echo "Done!"
 
 ####################################################################
-home=~
 built_path="${home}/.vim/bin:${PATH}"
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
@@ -202,3 +218,19 @@ elif [[ "$OSTYPE" == "cygwin" ]]; then
 else
   echo "Unrecognized operating system! Please include ~/.vim/bin to PATH environment variable."
 fi
+
+echo "We need to restart your system in order for changes to take effect."
+echo "Do you want to restart your system now? [Y/N]"
+
+read response
+case $response in
+  [Y/y/Yes/yes])
+    echo "Restarting system now!"
+    sleep 1
+    sudo shutdown -r 0
+    ;;
+  *)
+    echo "System not restarting."
+    echo "Perform manual restart for changes to take effect."
+    ;;
+esac
