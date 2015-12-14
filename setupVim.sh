@@ -199,6 +199,8 @@ if [ ! -e "bin" ]; then
   git clone https://github.com/jhorta/bin.git
   chmod +x bin/run
   chmod +x bin/template
+  cp bin/run /usr/bin/
+  cp bin/template /usr/bin/
 fi
 echo "Done!"
 
