@@ -204,6 +204,13 @@ if [ ! -e "bin" ]; then
 fi
 echo "Done!"
 
+cd
+if [ ! -e '.tmux.conf' ]; then
+  touch '.tmux.conf'
+fi
+echo "# Sane scrolling" >> '.tmux.conf'
+echo "set -g terminal-overrides 'xterm*:smcup@:rmcup@'" >> '.tmux.conf'
+
 ####################################################################
 built_path="${home}/.vim/bin:${PATH}"
 
